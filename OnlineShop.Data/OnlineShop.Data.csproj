@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{00A74656-45E6-4483-B024-EDBE00D4AE9B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OnlineShop.Data</RootNamespace>
+    <AssemblyName>OnlineShop.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cors, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cors.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Cors, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Cors.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.2.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infrastructure\DbFactory.cs" />
+    <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\IDbFactory.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Migrations\202107300159381_InitialDB.cs" />
+    <Compile Include="Migrations\202107300159381_InitialDB.designer.cs">
+      <DependentUpon>202107300159381_InitialDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108020759347_Intergarted-AspnetIdentity.cs" />
+    <Compile Include="Migrations\202108020759347_Intergarted-AspnetIdentity.designer.cs">
+      <DependentUpon>202108020759347_Intergarted-AspnetIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108020852015_changeKey.cs" />
+    <Compile Include="Migrations\202108020852015_changeKey.designer.cs">
+      <DependentUpon>202108020852015_changeKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108170128490_AddTagField.cs" />
+    <Compile Include="Migrations\202108170128490_AddTagField.designer.cs">
+      <DependentUpon>202108170128490_AddTagField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108280738483_AddContentToSlide.cs" />
+    <Compile Include="Migrations\202108280738483_AddContentToSlide.designer.cs">
+      <DependentUpon>202108280738483_AddContentToSlide.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108300232203_addQualityToProduct.cs" />
+    <Compile Include="Migrations\202108300232203_addQualityToProduct.designer.cs">
+      <DependentUpon>202108300232203_addQualityToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108301141008_AddProductTagsToProduct.cs" />
+    <Compile Include="Migrations\202108301141008_AddProductTagsToProduct.designer.cs">
+      <DependentUpon>202108301141008_AddProductTagsToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108301304066_productTagToProductss.cs" />
+    <Compile Include="Migrations\202108301304066_productTagToProductss.designer.cs">
+      <DependentUpon>202108301304066_productTagToProductss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108310235001_tableContactDetails.cs" />
+    <Compile Include="Migrations\202108310235001_tableContactDetails.designer.cs">
+      <DependentUpon>202108310235001_tableContactDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108311013366_feedBack2.cs" />
+    <Compile Include="Migrations\202108311013366_feedBack2.designer.cs">
+      <DependentUpon>202108311013366_feedBack2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108311015239_feedback.cs" />
+    <Compile Include="Migrations\202108311015239_feedback.designer.cs">
+      <DependentUpon>202108311015239_feedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109011026501_addCustomerId.cs" />
+    <Compile Include="Migrations\202109011026501_addCustomerId.designer.cs">
+      <DependentUpon>202109011026501_addCustomerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109020914557_foreinKeyOrders.cs" />
+    <Compile Include="Migrations\202109020914557_foreinKeyOrders.designer.cs">
+      <DependentUpon>202109020914557_foreinKeyOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109020920197_updateForeinKey.cs" />
+    <Compile Include="Migrations\202109020920197_updateForeinKey.designer.cs">
+      <DependentUpon>202109020920197_updateForeinKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109020934317_updateForeinKeyOrderDetails.cs" />
+    <Compile Include="Migrations\202109020934317_updateForeinKeyOrderDetails.designer.cs">
+      <DependentUpon>202109020934317_updateForeinKeyOrderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109031329009_RenameToTable.cs" />
+    <Compile Include="Migrations\202109031329009_RenameToTable.designer.cs">
+      <DependentUpon>202109031329009_RenameToTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109031351396_addGroupUser.cs" />
+    <Compile Include="Migrations\202109031351396_addGroupUser.designer.cs">
+      <DependentUpon>202109031351396_addGroupUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109031356479_userGrouptable.cs" />
+    <Compile Include="Migrations\202109031356479_userGrouptable.designer.cs">
+      <DependentUpon>202109031356479_userGrouptable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109110251131_changeOderDetails.cs" />
+    <Compile Include="Migrations\202109110251131_changeOderDetails.designer.cs">
+      <DependentUpon>202109110251131_changeOderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109110432031_changeProduct.cs" />
+    <Compile Include="Migrations\202109110432031_changeProduct.designer.cs">
+      <DependentUpon>202109110432031_changeProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109110744200_RevenuesStatisticSP.cs" />
+    <Compile Include="Migrations\202109110744200_RevenuesStatisticSP.designer.cs">
+      <DependentUpon>202109110744200_RevenuesStatisticSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109121040362_updateProduct.cs" />
+    <Compile Include="Migrations\202109121040362_updateProduct.designer.cs">
+      <DependentUpon>202109121040362_updateProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109151343263_reportOrder.cs" />
+    <Compile Include="Migrations\202109151343263_reportOrder.designer.cs">
+      <DependentUpon>202109151343263_reportOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109151400389_userOrder.cs" />
+    <Compile Include="Migrations\202109151400389_userOrder.designer.cs">
+      <DependentUpon>202109151400389_userOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="OnlineShopDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleRepository.cs" />
+    <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
+    <Compile Include="Repositories\ContactDetailRepository.cs" />
+    <Compile Include="Repositories\ErrorRepository.cs" />
+    <Compile Include="Repositories\FeedBackRepository.cs" />
+    <Compile Include="Repositories\FooterRepository.cs" />
+    <Compile Include="Repositories\MenuGroupRepository.cs" />
+    <Compile Include="Repositories\MenuRepository.cs" />
+    <Compile Include="Repositories\OrderDetailRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\PageRepository.cs" />
+    <Compile Include="Repositories\PostCategoryRepository.cs" />
+    <Compile Include="Repositories\PostRepository.cs" />
+    <Compile Include="Repositories\PostTagRepository.cs" />
+    <Compile Include="Repositories\ProductCategoryRespository.cs" />
+    <Compile Include="Repositories\ProductRespository.cs" />
+    <Compile Include="Repositories\ProductTagRepository.cs" />
+    <Compile Include="Repositories\SlideRepository.cs" />
+    <Compile Include="Repositories\SupportOnlineRepository.cs" />
+    <Compile Include="Repositories\SystemConfigRepository.cs" />
+    <Compile Include="Repositories\TagRepository.cs" />
+    <Compile Include="Repositories\VisitorStatisticRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShop.Common\OnlineShop.Common.csproj">
+      <Project>{23ba0c1b-55ad-46a7-9597-8032c1bcc407}</Project>
+      <Name>OnlineShop.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineShop.Model\OnlineShop.Model.csproj">
+      <Project>{00c7937d-688e-4c52-8745-d6d0829b7235}</Project>
+      <Name>OnlineShop.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202107300159381_InitialDB.resx">
+      <DependentUpon>202107300159381_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108020759347_Intergarted-AspnetIdentity.resx">
+      <DependentUpon>202108020759347_Intergarted-AspnetIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108020852015_changeKey.resx">
+      <DependentUpon>202108020852015_changeKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108170128490_AddTagField.resx">
+      <DependentUpon>202108170128490_AddTagField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108280738483_AddContentToSlide.resx">
+      <DependentUpon>202108280738483_AddContentToSlide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108300232203_addQualityToProduct.resx">
+      <DependentUpon>202108300232203_addQualityToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108301141008_AddProductTagsToProduct.resx">
+      <DependentUpon>202108301141008_AddProductTagsToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108301304066_productTagToProductss.resx">
+      <DependentUpon>202108301304066_productTagToProductss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108310235001_tableContactDetails.resx">
+      <DependentUpon>202108310235001_tableContactDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108311013366_feedBack2.resx">
+      <DependentUpon>202108311013366_feedBack2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108311015239_feedback.resx">
+      <DependentUpon>202108311015239_feedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109011026501_addCustomerId.resx">
+      <DependentUpon>202109011026501_addCustomerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109020914557_foreinKeyOrders.resx">
+      <DependentUpon>202109020914557_foreinKeyOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109020920197_updateForeinKey.resx">
+      <DependentUpon>202109020920197_updateForeinKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109020934317_updateForeinKeyOrderDetails.resx">
+      <DependentUpon>202109020934317_updateForeinKeyOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109031329009_RenameToTable.resx">
+      <DependentUpon>202109031329009_RenameToTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109031351396_addGroupUser.resx">
+      <DependentUpon>202109031351396_addGroupUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109031356479_userGrouptable.resx">
+      <DependentUpon>202109031356479_userGrouptable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109110251131_changeOderDetails.resx">
+      <DependentUpon>202109110251131_changeOderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109110432031_changeProduct.resx">
+      <DependentUpon>202109110432031_changeProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109110744200_RevenuesStatisticSP.resx">
+      <DependentUpon>202109110744200_RevenuesStatisticSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109121040362_updateProduct.resx">
+      <DependentUpon>202109121040362_updateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109151343263_reportOrder.resx">
+      <DependentUpon>202109151343263_reportOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109151400389_userOrder.resx">
+      <DependentUpon>202109151400389_userOrder.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

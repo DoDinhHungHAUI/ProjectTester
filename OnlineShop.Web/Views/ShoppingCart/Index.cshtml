@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-grids">
+
+    <h2 class="title text-center">Thông tin giỏ hàng</h2>
+
+    <div class="single_top">
+        <div class="single_grid">
+            <div id="cartContent">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <td>ID</td>
+                            <td>Tên sản phẩm</td>
+                            <td>Hình ảnh</td>
+                            <td>Giá</td>
+                            <td>Số lượng</td>
+                            <td>Thành tiền</td>
+                            <td>#</td>
+                        </tr>
+                    </thead>
+                    <tbody id="cartBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <a class="btn btn-success" id="btnContinue" href="@ViewBag.urlHome">
+                Tiếp tục mua hàng
+            </a>
+
+           @* <button class="btn btn-success" id="btnContinue">Tiếp tục mua hàng</button>*@
+            <button class="btn btn-danger" id="btnDeleteAll">Xóa giỏ hàng</button>
+            <button class="btn btn-warning" id="btnCheckout">Thanh toán</button>
+
+            <div class="pull-right">
+                Tổng tiền: <span id="lblTotalOrder"></span>
+            </div>
+
+            <div id="divCheckout" style="display:none;">
+                <div class="reservation_top">
+                    <div class="contact_right">
+                        <h3>Thanh toán</h3>
+                        <div class="contact-form">
+                            <form method="post" id="frmPayment">
+
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <label>
+                                        <input type="checkbox" id="chkUserLoginInfo" />
+                                        Sử dụng thông tin đăng nhập
+                                    </label>
+                                }
+
+                                <div class="form-group">
+                                    <input type="text" class="textbox form-control" id="txtName" name="name" placeholder="Họ tên">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="textbox form-control" id="txtAddress" name="address" placeholder="Địa chỉ">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="textbox form-control" id="txtEmail" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="textbox form-control" id="txtPhone" name="phone" placeholder="Điện thoại">
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea value="" id="txtMessage form-control" style="font-size : 15px;">Message</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-warning" id="btnCreateOrder"><i class="fab fa-paypal"></i> Xác nhận</button>
+                                    @*<input type="button" id="btnCreateOrder" value="Thanh toán">*@
+                                </div>
+
+                                <div class="clearfix"> </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="clearfix"> </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script id="tplCart" type="x-tmpl-mustache">
+  <tr>
+    <td>{{ProductId}}</td>
+    <td>{{ProductName}}</td>
+    <td><img src="/Assets/Images/{{Image}}" height="50px" /></td>
+    <td>{{PriceF}} Vnđ</td>
+    <td><input type="text" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" /></td>
+    <td id="amount_{{ProductId}}">{{Amount}} Vnđ</td>
+    <td><button class="btn btn-danger btnDeleteItem" data-id="{{ProductId}}"><i class="fas fa-times"></i></button></td>
+  </tr>
+</script>
+
+
+
+<style>
+    .btn{
+        cursor : pointer;
+    }
+    .single_top{
+        width : 90% !important;
+    }
+
+    #cartBody img{
+        height : 50px !important;
+    }
+
+    .txtQuantity {
+        height: 22px;
+        width: 62px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .table > tbody > tr > td, .table > thead > tr > td
+    {
+        text-align:center;
+    }
+
+    #txtName, #txtAddress, #txtEmail, #txtPhone, #txtMessage {
+        background-color: white;
+        font-size: 15px;
+        padding-left: 12px;
+        height: 32px;
+    }
+
+    .contact-form input[type="text"], .contact-form textarea {
+        padding: 8px;
+        display: block;
+        width: 98%;
+        background: white;
+        border: 1px solid grey;
+        outline: none;
+        color: #464646;
+        /* font-size: 0.8125em; */
+        font-family: Arial, Helvetica, sans-serif;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: inset 0px 0px 3px rgb(199, 199, 199);
+        -o-box-shadow: inset 0px 0px 3px rgb(199, 199, 199);
+        -webkit-appearance: none;
+    }
+
+    .contact-form div {
+        padding: 2px 0px;
+    }
+
+    h2.title {
+        color: #FE980F;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 15px;
+        text-transform: uppercase;
+        margin-bottom: 13px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    h2.title::before {
+        content: " ";
+        position: absolute;
+        background: rgb(255, 255, 255);
+        bottom: -6px;
+        width: 220px;
+        height: 30px;
+        z-index: -1;
+        left: 50%;
+        margin-left: -110px;
+    }
+
+    h2.title::after {
+        content: " ";
+        position: absolute;
+        border: 1px solid rgb(245, 245, 245);
+        bottom: 8px;
+        left: 0px;
+        width: 100%;
+        height: 0px;
+        z-index: -2;
+    }
+
+    .thead-dark {
+        background-color: #333333;
+        color: white;
+        font-weight: 700;
+    }
+
+    .btnDeleteItem {
+        padding: 3px 10px !important;
+    }
+
+    .pull-right{
+        font-weight : 700;
+    }
+    #lblTotalOrder {
+        color: coral;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    #cartContent {
+        padding: 20px 0px;
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+</style>
+
+
+
+
+

@@ -1,0 +1,326 @@
+﻿
+@model OnlineShop.Web.infrastructure.Core.PaginationSet<OnlineShop.Web.Models.ProductViewModel>
+
+
+@{
+    var category = (OnlineShop.Web.Models.ProductCategoryViewModel)ViewBag.Category;
+    var pageIndex = Model.Page;
+    ViewBag.Title = pageIndex == 1 ? category.Name : category.Name + " - Trang " + pageIndex;
+    ViewBag.MetaKeyword = pageIndex == 1 ? category.MetaKeyword : category.MetaKeyword + " - Trang " + pageIndex;
+    ViewBag.MetaDescription = pageIndex == 1 ? category.MetaDescription : category.MetaDescription + " - Trang " + pageIndex;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.Count > 0)
+{
+    var dem = 0;
+
+    <div class="content-grids">
+        <div class="section group">
+
+            <h4>Danh mục :  @category.Name - @Model.TotalCount Sản phẩm </h4>
+
+            <div class="row-fluid">
+
+                @for (int i = 0; i < Model.Items.Count(); i += 4)
+                {
+                    <ul class="thumbnails">
+                        @foreach (var product in Model.Items.Skip(i).Take(4))
+                        {
+                            var url = "/" + product.Alias + ".p-" + product.ID + ".html";
+
+                            <li class="span4">
+                                <div class="thumbnail">
+                                    <a href="@url" class="overlay"></a>
+                                    <a class="zoomTool" href="@url" title="add to cart" style="display: none;"><span class="icon-search"></span> Chi tiết</a>
+                                    <a href="product_details.html"><img src="~/Assets/Images/@product.Image" alt="@product.Name"></a>
+                                    <div class="caption cntr">
+                                        <p>@product.Name</p>
+                                        <p><strong> @(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N0").Replace("," , ".")) Vnđ</strong></p>
+                                        <h4><a class="shopBtn btnAddToCart" href="#" data-id="@product.ID" title="add to cart">Thêm vào giỏ hàng</a></h4>
+                                        @*<div class="actionList">
+                                        <a class="pull-left" href="#">Add to Wish List </a>
+                                        <a class="pull-left" href="#"> Add to Compare </a>
+                                    </div>*@
+                                        <br class="clr">
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                }
+
+
+                @*<ul class="thumbnails">
+                @foreach (var product in Model.Items)
+                {
+                    var nameClass = "";
+
+                    var url = "/" + product.Alias + ".p" + product.ID;
+
+                    if (dem % 3 == 0)
+                    {
+                        nameClass = "firsChild";
+                    }
+
+                    dem++;
+
+                    <li class="span4 @nameClass">
+                        <div class="thumbnail">
+                            <a href="product_details.html" class="overlay"></a>
+                            <a class="zoomTool" href="@url" title="add to cart" style="display: none;"><span class="icon-search"></span> Chi tiết</a>
+                            <a href="product_details.html"><img src="~/Assets/Images/@product.Image" alt="@product.Name"></a>
+                            <div class="caption cntr">
+                                <p>@product.Name</p>
+                                <p><strong> @(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N0"))</strong></p>
+                                <h4><a class="shopBtn" href="#" title="add to cart">Thêm vào giỏ hàng</a></h4>
+                                <div class="actionList">
+                                    <a class="pull-left" href="#">Add to Wish List </a>
+                                    <a class="pull-left" href="#"> Add to Compare </a>
+                                </div>
+                                <br class="clr">
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>*@
+            </div>
+
+            @if (Model.TotalPages > 1)
+            {
+                //Create numeric links
+                var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
+                var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+
+                <div style="text-align: center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+
+                            @if (Model.Page > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="?page=1 page-link" href="?page=1" aria-label="First">
+                                        First
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="page-link" href="?page=@(Model.Page-1)" aria-label="Previous">
+                                        Prev
+                                    </a>
+                                </li>
+                            }
+                            @for (int i = startPageIndex; i <= endPageIndex; i++)
+                            {
+                                if (Model.Page == i)
+                                {
+                                    <li class="active page-item"><a href="?page=@i" class="page-link" title="trang @i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="?page=@i" title="Trang @i">@i</a></li>
+                                }
+                            }
+
+                            @if (Model.Page < Model.TotalPages)
+                            {
+                                <li>
+                                    <a href="?page=@(Model.Page+1)" aria-label="Next">
+                                        Next
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?page=@Model.TotalPages" aria-label="Last">
+                                        Last
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+
+            }
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center">Không có bản ghi nào được tìm thấy.</div>
+}
+
+
+
+@*<div>
+    <nav>
+        <ul class="pagination">
+            @if (Model.Page > 1)
+            {
+                <li>
+                    <a class="?page=1" aria-label="First">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=@(Model.Page-1)" aria-label="Previous">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+
+            @for (int i = startPageIndex; i <= endPageIndex; i++)
+            {
+                if (Model.Page == i)
+                {
+                    <li class="active"><a href="?page=@i" title="trang @i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="?page=@i" title="Trang @i">@i</a></li>
+                }
+            }
+            @if (Model.Page < Model.TotalPages)
+            {
+                <li>
+                    <a href="?page=@(Model.Page+1)" aria-label="Next">
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=@Model.TotalPages" aria-label="Last">
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+
+
+        </ul>
+    </nav>
+</div>
+*@
+
+@*<div class="content-grids">
+        <div class="section group">
+            <div class="row-fluid">
+                <ul class="thumbnails">
+                    <li class="span4">
+                        <div class="thumbnail">
+                            <a href="product_details.html" class="overlay"></a>
+                            <a class="zoomTool" href="product_details.html" title="add to cart" style="display: none;"><span class="icon-search"></span> QUICK VIEW</a>
+                            <a href="product_details.html"><img src="/Assets/Client2/img/a.jpg" alt=""></a>
+                            <div class="caption cntr">
+                                <p>Manicure &amp; Pedicure</p>
+                                <p><strong> $22.00</strong></p>
+                                <h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+                                <div class="actionList">
+                                    <a class="pull-left" href="#">Add to Wish List </a>
+                                    <a class="pull-left" href="#"> Add to Compare </a>
+                                </div>
+                                <br class="clr">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span4">
+                        <div class="thumbnail">
+                            <a href="product_details.html" class="overlay"></a>
+                            <a class="zoomTool" href="product_details.html" title="add to cart" style="display: none;"><span class="icon-search"></span> QUICK VIEW</a>
+                            <a href="product_details.html"><img src="/Assets/Client2/img/b.jpg" alt=""></a>
+                            <div class="caption cntr">
+                                <p>Manicure &amp; Pedicure</p>
+                                <p><strong> $22.00</strong></p>
+                                <h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+                                <div class="actionList">
+                                    <a class="pull-left" href="#">Add to Wish List </a>
+                                    <a class="pull-left" href="#"> Add to Compare </a>
+                                </div>
+                                <br class="clr">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span4">
+                        <div class="thumbnail">
+                            <a href="product_details.html" class="overlay"></a>
+                            <a class="zoomTool" href="product_details.html" title="add to cart" style="display: none;"><span class="icon-search"></span> QUICK VIEW</a>
+                            <a href="product_details.html"><img src="/Assets/Client2/img/c.jpg" alt=""></a>
+                            <div class="caption cntr">
+                                <p>Manicure &amp; Pedicure</p>
+                                <p><strong> $22.00</strong></p>
+                                <h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+                                <div class="actionList">
+                                    <a class="pull-left" href="#">Add to Wish List </a>
+                                    <a class="pull-left" href="#"> Add to Compare </a>
+                                </div>
+                                <br class="clr">
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="thumbnails">
+                    <li class="span4">
+                        <div class="thumbnail">
+                            <a href="product_details.html" class="overlay"></a>
+                            <a class="zoomTool" href="product_details.html" title="add to cart" style="display: none;"><span class="icon-search"></span> QUICK VIEW</a>
+                            <a href="product_details.html"><img src="/Assets/Client2/img/a.jpg" alt=""></a>
+                            <div class="caption cntr">
+                                <p>Manicure &amp; Pedicure</p>
+                                <p><strong> $22.00</strong></p>
+                                <h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+                                <div class="actionList">
+                                    <a class="pull-left" href="#">Add to Wish List </a>
+                                    <a class="pull-left" href="#"> Add to Compare </a>
+                                </div>
+                                <br class="clr">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span4">
+                        <div class="thumbnail">
+                            <a href="product_details.html" class="overlay"></a>
+                            <a class="zoomTool" href="product_details.html" title="add to cart" style="display: none;"><span class="icon-search"></span> QUICK VIEW</a>
+                            <a href="product_details.html"><img src="/Assets/Client2/img/b.jpg" alt=""></a>
+                            <div class="caption cntr">
+                                <p>Manicure &amp; Pedicure</p>
+                                <p><strong> $22.00</strong></p>
+                                <h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+                                <div class="actionList">
+                                    <a class="pull-left" href="#">Add to Wish List </a>
+                                    <a class="pull-left" href="#"> Add to Compare </a>
+                                </div>
+                                <br class="clr">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+
+
+<style>
+    .thumbnails > li {
+        margin-bottom: 5px !important;
+    }
+
+    .span4 {
+        margin-top: 10px;
+    }
+
+    .firsChild {
+        margin-left: 0px !important;
+    }
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img
+    {
+        height : 240px !important;
+    }
+
+    .row-fluid .span4 {
+        width: 23% !important;
+    }
+
+</style>

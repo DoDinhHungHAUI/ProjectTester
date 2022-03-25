@@ -1,0 +1,197 @@
+﻿
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div class="wrap">
+    <!----start-Header---->
+    <div class="header">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3 style="font-family: cursive; color: rgb(255, 133, 51);">HungOnlineShop</h3>
+                <h5 style=" margin-left: 20px; line-height: 0px; font-family: cursive;color : rgb(255, 51, 51)">Phục vụ khách hàng 24/7</h5>
+            </div>
+            <div class="col-md-6">
+                <div class="search-bar">
+                    <form method="get" action="/tim-kiem.html">
+                        <input id="txtSearch" type="text" name="keyword" placeholder="Từ khóa...">
+                        <button type="submit" id="search">
+                            <i class="fas fa-search"></i>
+                            Tìm kiếm
+                        </button>
+                        @*<input type="submit" value="Search" />*@
+                    </form>
+
+                </div>
+                <div class="clear"> </div>
+                <div class="header-top-nav">
+                    <ul>
+
+                        @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { @id = "frmLogout" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            if (Request.IsAuthenticated)
+                            {
+                                <li><a href="/Thong-tin-tai-khoan.html">Xin chào : @User.Identity.Name</a></li>
+
+                                <li>
+
+                                    <div class="dropdown">
+                                        @*<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            Dropdown button
+                                        </button>*@
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fas fa-user"></i> Tài khoản
+                                        </a>
+
+                                        <div class="dropdown-menu" style="min-width : 193px;" >
+                                            <a class="dropdown-item" style="width : 100%;text-indent : 9px" href="/Thong-tin-tai-khoan.html"><i class="fas fa-info" style="margin-right : 5px;"></i> Thông tin tài khoản</a>
+
+                                            <hr style="margin-top : 5px;margin-bottom : 5px;" />
+                                            <a class="dropdown-item" style="width : 100%; text-indent : 9px" href="/Sua-Tai-khoan.html" id="changeAccount"><i class="fas fa-user-edit" style="margin-right : 5px;"></i> Sửa đổi tài khoản</a>
+                                            <hr style="margin-top : 5px;margin-bottom : 5px;" />
+                                            <a class="dropdown-item" style="width : 100% ; text-indent : 9px" href="#" id="btnLogout"><i class="far fa-sign-out" style="margin-right : 5px;"></i> Thoát</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                @*<div class="btn-group">
+
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="far fa-user-circle"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Thông tin tài khoản</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">Sửa đổi tài khoản</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">Đăng Xuất</a></li>
+                                        </ul>
+                                    </div>*@
+
+
+                                @*<li><a href="#" id="btnLogout">Đăng xuất</a></li>*@
+                            }
+                            else
+                            {
+                                <li><a href="dang-ky.html"><i class="fas fa-user-plus"></i> Đăng ký</a></li>
+                                <li><a href="dang-nhap.html"> <i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+                            }
+
+                            @*<li><a href="#">Delivery</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#">My account</a></li>*@
+
+                            @Html.Action("CartPartial", "ShoppingCart")
+
+                        }
+
+                    </ul>
+                </div>
+                <div class="clear"> </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="clear"> </div>
+<div class="top-header">
+    <div class="wrap">
+        <!----start-logo---->
+        <div class="logo">
+            <a href="@ViewBag.urlHome"><img src="~/Assets/client/images/logo.png" title="logo" /></a>
+        </div>
+        <!----end-logo---->
+        <!----start-top-nav---->
+        <div class="top-nav">
+            <ul>
+               
+                <li><a href="@ViewBag.urlHome">Trang chủ</a></li>
+               <li><a href="#">Giới thiệu</a></li>
+                @*<li><a href="store.html">Store</a></li>
+                <li><a href="store.html">Featured</a></li>
+                <li><a href="blog.html">Blog</a></li>*@
+                <li><a href="/lien-he.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="clear"> </div>
+    </div>
+</div>
+<!----End-top-nav---->
+<!----End-Header---->
+<!--start-image-slider---->
+
+
+<style>
+    .header-top-nav ul li a, .header-top-nav {
+        font-size: 0.95em !important;
+    }
+
+    .header-top-nav {
+        height: 21px !important;
+    }
+
+    .search-bar {
+        height: 31px !important;
+    }
+
+    .search-bar {
+        background: #fff;
+        margin: 8px 0px 12.5px 0px;
+        border-radius: 0.3em;
+    }
+
+    .logo {
+        padding-top: 0px !important;
+    }
+
+    .top-header {
+        padding: 12px 0px 0px 0px !important;
+    }
+
+    ul {
+        margin: 0px 0px 10px 0px !important;
+    }
+
+        ul > li > a > i {
+            margin-right: 5px !important;
+        }
+
+    #txtSearch {
+        height: 25px;
+        width: 258px;
+        box-shadow: none;
+        border-radius: 3px 0px 0px 3px;
+    }
+
+    #search {
+        border-radius: 0px 3px 3px 0px;
+        height: 33.7px;
+        position: relative;
+        right: 4px;
+        border: none;
+        background-color: #ffad33;
+        color : white;
+    }
+
+    #search:hover {
+        background-color: #ff9900;
+    }
+
+</style>
+
+
+<script>
+
+    $('#btnLogout').off('click').on('click', function (e) {
+        e.preventDefault();
+        $('#frmLogout').submit();
+    });
+
+
+</script>

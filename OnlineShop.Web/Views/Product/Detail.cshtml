@@ -1,0 +1,446 @@
+﻿@model OnlineShop.Web.Models.ProductViewModel
+
+
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.MetaKeyword = Model.MetaKeyword;
+    ViewBag.MetaDescription = Model.MetaDescription;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section jsSliderDetails{
+
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".menu_body").hide();
+            //toggle the componenet with class menu_body
+            $(".menu_head").click(function () {
+                $(this).next(".menu_body").slideToggle(600);
+                var plusmin;
+                plusmin = $(this).children(".plusminus").text();
+
+                if (plusmin == '+')
+                    $(this).children(".plusminus").text('-');
+                else
+                    $(this).children(".plusminus").text('+');
+            });
+        });
+    </script>
+
+
+
+}
+
+
+
+<div class="content-grids">
+
+    <div class="details-page">
+        <div class="back-links">
+            <ul>
+                <li><a href="/Home/Index">Home</a><img src="~/Assets/client/images/arrow.png" alt=""></li>
+                <li><a href="#">Product</a><img src="~/Assets/client/images/arrow.png" alt=""></li>
+                <li><a href="#">Product-Details</a><img src="~/Assets/client/images/arrow.png" alt=""></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="image_product">
+            <div class="detalis-image">
+
+                <div class="flexslider">
+                    <ul class="slides">
+
+                        @{
+                            string[] arrayImage;
+                            int d = 0;
+
+                            arrayImage = Model.MoreImages.Split('|');
+
+                            arrayImage = arrayImage.Take(arrayImage.Length - 1).ToArray();
+
+                            //for (int i = 0; i <= Model.MoreImages.Length; i++)
+                            //{
+                            //    if (Model.MoreImages[i] == '|')
+                            //    {
+                            //        arrayImage.Add(Model.MoreImages.Substring(d, i));
+                            //        d = d + 1;
+                            //    }
+                            //}
+
+
+                            if (arrayImage.Length > 0)
+                            {
+                                foreach (var item in arrayImage)
+                                {
+                                    <li data-thumb="/Assets/Images/@item">
+                                        <div class="thumb-image"> <img src="~/Assets/Images/@item" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                                    </li>
+                                }
+                            }
+
+                        }
+
+                        @*<li data-thumb="/Assets/Images/@Model.Image">
+                                <div class="thumb-image"> <img src="~/Assets/Images/@Model.Image" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                            </li>
+                            <li data-thumb="/Assets/Images/@Model.Image">
+                                <div class="thumb-image"> <img src="~/Assets/Images/@Model.Image" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                            </li>
+                            <li data-thumb="/Assets/Images/@Model.Image">
+                                <div class="thumb-image"> <img src="~/Assets/Images/@Model.Image" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 details_product">
+
+            <p class="mb-2 text-muted text-uppercase small" style="font-size : 15px ; font-weight : 700">@Model.Name</p>
+
+            <p><span class="mr-1"><strong style="color :#ff9f1a">@Model.Price.ToString("N0").Replace(",", ".") Vnđ</strong></span></p>
+
+            <div class="table-responsive">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Hãng sản xuất</strong></th>
+                            <td>@Model.Model</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Màu sắc</strong></th>
+                            <td>@Model.Color</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Nơi sản xuất</strong></th>
+                            <td>@Model.whereProduct</td>
+                        </tr>
+
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Bảo hành</strong></th>
+                            <td>@Model.Warranty Tháng</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <button type="button" data-id="@Model.ID" class="btn btn-light btn-md mr-1 mb-2 btnAddToCart" id="addtoCart">
+                <i class="fas fa-shopping-cart pr-2"></i> Thêm vào giỏ hàng
+            </button>
+
+            <div class="styles__ProductActionV2Container-sc-kdypyf-0 dzVRbr">
+                <div class="styles__Text-sc-kdypyf-1 coYCPR">Chia sẻ:</div>
+                <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/social-facebook.svg" alt="social-facebook" class="styles__Icon-sc-kdypyf-2 elgJGA left"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/social-messenger.svg" alt="social-messenger" class="styles__Icon-sc-kdypyf-2 elgJGA">
+                <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/social-pinterest.svg" alt="social-pinterest" class="styles__Icon-sc-kdypyf-2 elgJGA"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/social-twitter.svg" alt="social-twitter" class="styles__Icon-sc-kdypyf-2 elgJGA">
+                <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/social-copy.svg" alt="social-copy" class="styles__Icon-sc-kdypyf-2 elgJGA last"><div class="styles__Separator-sc-kdypyf-3 lrhiT"></div><div data-view-id="pdp_details_like" class="styles__LikeInfo-sc-kdypyf-4 iNnSfE">
+                    <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-like.svg" alt="social-like" class="styles__Icon-sc-kdypyf-2 elgJGA">
+                    <div class="styles__Text-sc-kdypyf-1 coYCPR">Thích</div>
+                </div>
+            </div>
+
+            <div class="styles__ProductActionV2Container-sc-kdypyf-0 dzVRbr">
+                <h5 style="font-weight : 700;">Tag :</h5>
+                <ul class="taglist">
+                    @foreach (var tag in (IEnumerable<OnlineShop.Web.Models.TagViewModel>)ViewBag.Tags)
+                    {
+                        <li><a href="/tag/@(tag.ID).html"><span class="badge badge-dark"># @(tag.Name)</span></a></li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Mô tả sản phẩm</h3>
+        @Html.Raw(Model.Content)
+    </div>
+
+
+
+    @*<div class="detalis-image-details">
+
+            <div>
+                <h3>Tên Sản phẩm : <span>@Model.Name</span></h3>
+                <h2>Giá : <span>@Model.Price</span><span>@Model.PromotionPrice</span></h2>
+                <h2>Bảo hành : <span>@Model.Warranty</span> Tháng</h2>
+            </div>
+
+            <div class="brand-history">
+                <h3>Mô tả sản phẩm :</h3>
+                <p>@Model.Content</p>
+                <a href="#" data-id="@Model.ID" class="btnAddToCart">Thêm vào giỏ hàng</a>
+            </div>
+
+            <div>
+
+            </div>
+            <div class="clear"> </div>
+
+            <div class="tag">
+                <h5>Tag :</h5>
+                <ul class="taglist">
+                    @foreach (var tag in (IEnumerable<OnlineShop.Web.Models.TagViewModel>)ViewBag.Tags)
+                    {
+                        <li><a href="/tag/@(tag.ID).html"><span class="badge badge-dark">@(tag.Name)</span></a></li>
+                    }
+
+                </ul>
+            </div>
+
+
+        </div>*@
+
+    <div class="clear"> </div>
+
+    <!--Sản phẩm liên quan-->
+    <h2 class="title text-center">Sản phẩm liên quan</h2>
+    <div class="section group">
+
+        @{
+            var listRecommentProduct = (IEnumerable<OnlineShop.Web.Models.ProductViewModel>)ViewBag.listRecommentProduct;
+        }
+
+        <div class="row-fluid">
+
+            @for (int i = 0; i < listRecommentProduct.Count(); i += 4)
+            {
+                <ul class="thumbnails">
+                    @foreach (var product in listRecommentProduct.Skip(i).Take(4))
+                    {
+                        var url = "/" + product.Alias + ".p-" + product.ID + ".html";
+
+                        <li class="span4">
+                            <div class="thumbnail">
+                                <a href="@url" class="overlay"></a>
+                                <a class="zoomTool" href="@url" title="add to cart" style="display: none;"><span class="icon-search"></span> Chi tiết</a>
+                                <a href="product_details.html"><img src="~/Assets/Images/@product.Image" alt="@product.Name"></a>
+                                <div class="caption cntr">
+                                    <p>@product.Name</p>
+                                    <p><strong> @(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N0").Replace(",", ".")) Vnđ</strong></p>
+                                    <h4><a class="shopBtn btnAddToCart" href="#" title="add to cart" data-id="@product.ID">Thêm vào giỏ hàng</a></h4>
+
+                                    <br class="clr">
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            }
+
+
+            @*<ul class="thumbnails">
+                    @foreach (var product in Model.Items)
+                    {
+                        var nameClass = "";
+
+                        var url = "/" + product.Alias + ".p" + product.ID;
+
+                        if (dem % 3 == 0)
+                        {
+                            nameClass = "firsChild";
+                        }
+
+                        dem++;
+
+                        <li class="span4 @nameClass">
+                            <div class="thumbnail">
+                                <a href="product_details.html" class="overlay"></a>
+                                <a class="zoomTool" href="@url" title="add to cart" style="display: none;"><span class="icon-search"></span> Chi tiết</a>
+                                <a href="product_details.html"><img src="~/Assets/Images/@product.Image" alt="@product.Name"></a>
+                                <div class="caption cntr">
+                                    <p>@product.Name</p>
+                                    <p><strong> @(product.Price == 0 ? "Liên hệ" : product.Price.ToString("N0"))</strong></p>
+                                    <h4><a class="shopBtn" href="#" title="add to cart">Thêm vào giỏ hàng</a></h4>
+                                    <div class="actionList">
+                                        <a class="pull-left" href="#">Add to Wish List </a>
+                                        <a class="pull-left" href="#"> Add to Compare </a>
+                                    </div>
+                                    <br class="clr">
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>*@
+        </div>
+
+        @*@if (listRecommentProduct.Count() > 0)
+            {
+                foreach (var item in listRecommentProduct)
+                {
+                    <div class="grid_1_of_4 images_1_of_4 products-info">
+                        <img src="/Assets/Images/grid-img1215322288.jpg">
+                        <a href="single.html">Laptop</a>
+                        <h3>300,200</h3>
+                        <div class="caption cntr">
+                            <p>@item.Name</p>
+                            <p><strong> @(item.Price == 0 ? "Liên hệ" : item.Price.ToString("N0"))</strong></p>
+                            <h4><a class="shopBtn" href="#" title="add to cart">Thêm vào giỏ hàng</a></h4>
+                            <div class="actionList">
+                                <a class="pull-left" href="#">Add to Wish List </a>
+                                <a class="pull-left" href="#"> Add to Compare </a>
+                            </div>
+                            <br class="clr">
+                        </div>
+                    </div>
+                }
+            }*@
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+<style>
+    h2.title {
+        color: #FE980F;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 15px;
+        text-transform: uppercase;
+        margin-bottom: 13px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    h2.title::before {
+        content: " ";
+        position: absolute;
+        background: rgb(255, 255, 255);
+        bottom: -6px;
+        width: 220px;
+        height: 30px;
+        z-index: -1;
+        left: 50%;
+        margin-left: -110px;
+    }
+
+    h2.title::after {
+        content: " ";
+        position: absolute;
+        border: 1px solid rgb(245, 245, 245);
+        bottom: 8px;
+        left: 0px;
+        width: 100%;
+        height: 0px;
+        z-index: -2;
+    }
+
+   
+    .text-center {
+        text-align: center;
+    }
+
+    .images_1_of_4 img {
+        height: 230px !important;
+    }
+
+    .flexslider .slides img {
+        height: 250px !important;
+    }
+
+    .row-fluid .span4 {
+        width: 23.2% !important;
+    }
+
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+        height: 230px !important;
+    }
+
+    .tag {
+        position: inherit !important;
+    }
+
+    .image_product{
+        margin-right : 100px;
+    }
+
+    .details_product{
+        margin-left : 47px;
+        text-indent : 2px;
+    }
+
+    #addtoCart {
+        background-color: #ff9f1a;
+        color: white;
+    }
+
+    #addtoCart:hover {
+        background-color: #e68a00;
+    }
+
+    .dzVRbr {
+        display: flex;
+        margin-top: 24px;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .coYCPR {
+        font-size: 15px;
+        line-height: 24px;
+        color: rgb(36, 36, 36);
+        font-weight : 700;
+    }
+    .elgJGA.left {
+        margin-left: 8px;
+    }
+    .elgJGA {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .iNnSfE {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .lrhiT {
+        width: 1px;
+        height: 20px;
+        background-color: rgb(242, 242, 242);
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .badge {
+        margin-top : 11px;
+        display: inline-block;
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: #777;
+        border-radius: 4px;
+    }
+    
+
+
+</style>

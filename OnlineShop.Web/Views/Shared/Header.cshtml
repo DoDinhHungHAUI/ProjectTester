@@ -1,0 +1,59 @@
+﻿<div class="wrap">
+    <!----start-Header---->
+    <div class="header">
+        <div class="search-bar">
+            <form method="get" action="/tim-kiem.html">
+                <input id="txtSearch" type="text" name="keyword" placeholder="Từ khóa">
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        <div class="clear"> </div>
+        <div class="header-top-nav">
+            <ul>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <li><a href="/tai-khoan.html">Xin chào : @User.Identity.Name</a></li>
+                    <li><a href="/thoat.html">Đăng xuất</a></li>
+                }
+                else
+                {
+                    <li><a href="dang-ky.html">Đăng ký</a></li>
+                    <li><a href="dang-nhap.html">Đăng nhập</a></li>
+                }
+                 
+                <li><a href="#">Delivery</a></li>
+                <li><a href="#">Checkout</a></li>
+                <li><a href="#">My account</a></li>
+                <li><a href="/gio-hang.html"><span>Giỏ hàng&nbsp;&nbsp;: </span></a><label> &nbsp;noitems</label></li>
+            </ul>
+        </div>
+        <div class="clear"> </div>
+    </div>
+</div>
+<div class="clear"> </div>
+<div class="top-header">
+    <div class="wrap">
+        <!----start-logo---->
+        <div class="logo">
+            <a href="index.html"><img src="~/Assets/client/images/logo.png" title="logo" /></a>
+        </div>
+        <!----end-logo---->
+        <!----start-top-nav---->
+        <div class="top-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="store.html">Featured</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="/lien-he.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="clear"> </div>
+    </div>
+</div>
+<!----End-top-nav---->
+<!----End-Header---->
+<!--start-image-slider---->
+

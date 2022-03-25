@@ -1,0 +1,172 @@
+﻿
+@using OnlineShop.Web.infrastructure.Custom;
+@model OnlineShop.Web.Models.RegisterViewModel
+
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content-grids">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+
+        if (ViewData["SuccessMsg"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <strong>Chúc mừng bạn! </strong> đã đăng ký thành công.
+                <br />Vui lòng click <a href="/dang-nhap.html">vào đây </a>để đăng nhập.
+            </div>
+        }
+
+<div class="register-top-grid">
+    <div class="title_infor_myself">
+        <h3>Thông tin cá nhân</h3>
+    </div>
+    <p style="color : red;">@ViewBag.Message</p>
+    <div class="form-group row">
+
+        <label for="hoten" class="col-form-label">Họ tên <span style="color : red;"> (*)</span></label>
+        @Html.TextBoxFor(model => model.FullName, new { placeholder = "Họ tên", @class = "form-control", @id = "hoten" })
+        @Html.ValidationMessageFor(m => m.FullName)
+
+        
+    </div>
+
+    <div class="form-group row">
+        <label for="email" class="col-form-label">Email <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", @id = "email" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div class="form-group row">
+        <label for="diachi" class="col-form-label">Địa chỉ <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.Address, new { placeholder = "Địa chỉ", @class = "form-control", @id = "diachi" })
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+
+    <div class="form-group row">
+
+        <label for="sodienthoai" class="col-form-label">Số điện thoại <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.PhoneNumber, new { placeholder = "Số điện thoại", @class = "form-control", @id = "sodienthoai" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+
+    <div class="form-group row">
+
+        <label for="taiKhoan" class="col-form-label">Tài khoản <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tài khoản", @class = "form-control", @id = "taiKhoan" })
+        @Html.ValidationMessageFor(m => m.UserName)
+
+    </div>
+    <div class="form-group row">
+        <label for="matKhau" class="col-form-label">Mật khẩu <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.PassWord, new { placeholder = "Mật khẩu", @class = "form-control", @id = "matKhau" })
+        @Html.ValidationMessageFor(m => m.PassWord)
+
+    </div>
+
+    <div class="form-group row">
+        <label for="NhaplaimatKhau" class="col-form-label">Nhập lại mật khẩu <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.ConfirmPassWord, new { placeholder = "Nhập lại mật khẩu", @class = "form-control", @id = "NhaplaimatKhau" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassWord)
+
+    </div>
+
+    @*<div class="form-group">
+            @{
+                MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+            }
+            @Html.Captcha(registerCaptcha)
+            @Html.TextBox("CaptchaCode")
+            @Html.ValidationMessage("CaptchaCode")
+        </div>*@
+
+
+    @Html.GoogleCaptcha()
+    @Html.InvalidGoogleCaptchaLabel("Captcha không hợp lệ !")
+
+      
+
+    <div class="clearfix"></div>
+
+    <div class="form-group">
+        <input type="submit" id="sign_out" value="Đăng ký" class="btn btn-warning" />
+    </div>
+</div>
+    }
+</div>
+
+@*<form method="POST" id="signup-form" class="signup-form">
+        <h2 class="form-title">Create account</h2>
+        <div class="form-group">
+            <input type="text" class="form-input" name="name" id="name" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-input" name="password" id="password" placeholder="Password">
+            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term">
+            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+        </div>
+        <div class="form-group">
+            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up">
+        </div>
+    </form>*@
+
+
+<style>
+    .form-group {
+        line-height: 33px;
+        margin-bottom: 0px !important;
+    }
+
+    .form-control {
+        width: 82% !important;
+    }
+
+    .title_infor_myself>h3 {
+        font-size: 23px !important;
+        text-align: center;
+    }
+
+    .form-control {
+        margin-top: 6px;
+        height: 33px !important;
+        margin-left: 10px;
+        box-shadow : none;
+    }
+    .form-control :focus {
+        box-shadow: none;
+    }
+
+    label {
+        width: 110px !important;
+    }
+
+    .field-validation-error {
+        margin-left: 124px;
+        color: red;
+    }
+
+    .g-recaptcha{
+        margin-left : 107px;
+    }
+
+    #sign_out{
+        margin-top : 20px;
+        margin-left : 107px;
+    }
+
+
+</style>

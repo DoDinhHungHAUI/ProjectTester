@@ -1,0 +1,57 @@
+﻿@model OnlineShop.Web.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+<h4 style="margin-top : 26px !important;font-size : 18px !important;text-align : center;">Đăng nhập bằng mạng xã hội</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Any())
+    {
+      using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+      {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+              <p>
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    <button type="submit" class="btn" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@p.AuthenticationType.ToLower()"></i> @p.AuthenticationType</button>
+                }
+              </p>
+            </div>
+      }
+    }
+
+}
+
+
+<style>
+    #Google {
+        background: #db4437;
+        color: white;
+        width: 100%;
+        line-height: 26px;
+        height: 40px;
+        font-size: 21px;
+        margin-top : 34px;
+    }
+   
+
+    #Facebook {
+        margin-top: 50px;
+        width: 100%;
+        color: white;
+        background-color: #4267B2;
+        height: 40px;
+        line-height: 26px;
+        font-size: 19px;
+    }
+
+
+
+
+</style>
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<OnlineShop.Web.Models.ProductCategoryViewModel>
+
+<div class="content-sidebar">
+    <h4>Danh mục sản phẩm</h4>
+    <ul style="margin : 0px">
+        @foreach (var item in Model.Where(x => x.ParentID == null))
+        {
+            var url = "/" + item.Alias + ".pc-" + item.ID + ".html";
+
+            <li><a href="@url">@item.Name</a></li>
+            var childCategories = Model.Where(x => x.ParentID == item.ID);
+
+            if (childCategories.Count() > 0)
+            {
+                foreach (var item2 in childCategories)
+                {
+                    var url2 = "/" + item.Alias + ".pc-" + item2.ID + ".html";
+
+                    <li class="submenu"><a href="@url2">@item2.Name</a></li>
+                }
+            }
+
+        }
+        @*<li><a href="#">Accord Mobiles</a></li>
+        <li class="submenu"><a href="#">Ace Mobile</a></li>
+        <li class="submenu"><a href="#">Acer Mobile</a></li>
+        <li class="submenu"><a href="#">Airfone</a></li>
+        <li><a href="#">Apple</a></li>
+        <li><a href="#">Blackberry</a></li>
+        <li><a href="#">Byond Tech</a></li>
+        <li class="submenu"><a href="#">Celkon Mobiles</a></li>
+        <li class="submenu"><a href="#">Dell Mobile Phones </a></li>
+        <li class="submenu"><a href="#">Fly Mobile</a></li>
+        <li><a href="#">Fujezone Mobiles </a></li>
+        <li><a href="#">HTC</a></li>
+        <li><a href="#">LG Mobiles</a></li>
+        <li class="submenu"><a href="#">Longtel Mobile</a></li>
+        <li class="submenu"><a href="#">Maxx</a></li>
+        <li class="submenu"><a href="#">Micromax Mobiles </a></li>
+        <li><a href="#">Samsung Mobiles</a></li>
+        <li><a href="#">Sony Ericsson Mobiles</a></li>
+        <li><a href="#">Wynncom Mobiles</a></li>*@
+    </ul>
+</div>
+
+<style>
+    .submenu{
+        text-indent : 13px !important;
+    }
+    .content-sidebar li a{
+        font-size : 13.5px !important;
+    }
+    .content-grids h4, .content-sidebar h4{
+        font-weight : 600 !important;
+        font-size : 1.3rem !important;
+    }
+</style>

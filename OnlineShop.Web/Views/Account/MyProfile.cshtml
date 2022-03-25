@@ -1,0 +1,130 @@
+﻿
+@model OnlineShop.Web.Models.MyProfileViewModel
+
+
+
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="content-grids">
+
+    <div class="register-top-grid">
+        <div style="text-align : center;">
+            <img src="https://media.geeksforgeeks.org/img-practice/user_web-1598433228.svg" alt="" style="margin-top : 14px;width : 79px;" />
+            <h3 style="font-family : Roboto,Arial,sans-serif">@Model.UserName</h3>
+        </div>
+    </div>
+
+    <div class="info_simple">
+        <h4 style="font-size : 20px !important;">Thông tin cơ bản</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="info">Họ tên : </p>
+            </div>
+            <div class="col-md-6">
+                <p class="result_info">@Model.FullName</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <hr />
+            <div class="col-md-6">
+                <p class="info">Ngày sinh : </p>
+            </div>
+            <div class="col-md-6">
+                <p class="result_info">@Model.BirthDay</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <hr />
+            <div class="col-md-6">
+                <p class="info">Địa chỉ : </p>
+            </div>
+            <div class="col-md-6">
+                <p class="result_info">@Model.Address</p>
+            </div>
+        </div>
+        <hr />
+        <h4 style="font-size : 20px !important;">Thông tin Liên hệ</h4>
+        <div class="row">
+            <hr />
+            <div class="col-md-6">
+                <p class="info">Số điện thoại : </p>
+            </div>
+            <div class="col-md-6">
+                <p class="result_info">@Model.PhoneNumber</p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <hr />
+            <div class="col-md-6">
+                <p class="info">Email : </p>
+            </div>
+            <div class="col-md-6">
+                <p class="result_info">@Model.Email</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+    .info_simple {
+        border: 1px solid #dadce0;
+        box-sizing: border-box;
+        padding: 20px;
+        width: 70%;
+        height: auto;
+        border-radius: 3px;
+        margin-left: 15%;
+    }
+
+    .info_simple h4{
+        font-family: 'Font Awesome 5 Pro';
+        font-size: 20px !important;
+    }
+
+    .info {
+        font-size: 15px !important;
+        text-align: right;
+        margin-right: 41px;
+    }
+    hr {
+        margin-top: 0px;
+        margin-bottom: 8px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    p {
+        font-size: 17px;
+        margin: 0 0 10px;
+        font-family: 'Font Awesome 5 Pro';
+        font-weight: 700;
+    }
+
+    .register-top-grid h3{
+        font-size: 22px;
+        font-family: 'Font Awesome 5 Pro';
+        font-weight: 700;
+        margin-top: 7px;
+    }
+
+
+</style>
+
+   
+
+
+

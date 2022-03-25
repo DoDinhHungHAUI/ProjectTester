@@ -1,0 +1,159 @@
+﻿@using OnlineShop.Web.infrastructure.Custom;
+@model OnlineShop.Web.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-grids">
+
+
+
+    @using (Html.BeginForm("EditUser", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+
+        if (ViewData["SuccessMsg"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <strong>Chúc mừng bạn! </strong> đã thay đổi tài khoản thành công.
+            </div>
+        }
+
+<div class="register-top-grid">
+    <div>
+        <h3>Thay đổi thông tin</h3>
+    </div>
+
+    <p style="color : red;">@ViewBag.Message</p>
+
+    <div class="form-group row">
+
+        <label for="hoten" class="col-form-label">Họ tên <span style="color : red;"> (*)</span></label>
+        @Html.TextBoxFor(model => model.FullName, new { placeholder = "Họ tên", @class = "form-control", @id = "hoten" })
+        @Html.ValidationMessageFor(m => m.FullName)
+    </div>
+
+    <div class="form-group row hidden">
+        <label for="email" class="col-form-label">Email <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", @id = "email" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div class="form-group row">
+        <label for="diachi" class="col-form-label">Địa chỉ <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.Address, new { placeholder = "Địa chỉ", @class = "form-control", @id = "diachi" })
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+
+    <div class="form-group row">
+
+        <label for="sodienthoai" class="col-form-label">Số điện thoại <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.PhoneNumber, new { placeholder = "Số điện thoại", @class = "form-control", @id = "sodienthoai" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+
+    <div class="form-group row">
+
+        <label for="taiKhoan" class="col-form-label">Tài khoản <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tài khoản", @class = "form-control", @id = "taiKhoan" })
+        @Html.ValidationMessageFor(m => m.UserName)
+
+    </div>
+    <div class="form-group row">
+        <label for="matKhau" class="col-form-label">Mật khẩu cũ <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.PassWordLast, new { placeholder = "Mật khẩu cũ", @class = "form-control", @id = "matKhau" })
+        @Html.ValidationMessageFor(m => m.PassWordLast)
+
+    </div>
+
+    <div class="form-group row">
+        <label for="NhaplaimatKhau" class="col-form-label">Mật khẩu mới <span style="color : red;">(*)</span></label>
+        @Html.TextBoxFor(model => model.PassWordNew, new { placeholder = "Nhập mật khẩu mới", @class = "form-control", @id = "NhaplaimatKhau" })
+        @Html.ValidationMessageFor(m => m.PassWordNew)
+
+    </div>
+
+    @*<div class="form-group">
+            @{
+                MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+            }
+            @Html.Captcha(registerCaptcha)
+            @Html.TextBox("CaptchaCode")
+            @Html.ValidationMessage("CaptchaCode")
+        </div>*@
+
+
+    @Html.GoogleCaptcha()
+    @Html.InvalidGoogleCaptchaLabel("Captcha không hợp lệ !")
+
+    <div class="clearfix"></div>
+
+    <div class="form-group">
+        <input type="submit" id="sign_out" value="Xác nhận" class="btn btn-warning" />
+    </div>
+</div>
+    }
+</div>
+
+
+<style>
+    .text-danger{
+        margin-left : 106px;
+    }
+    .form-group {
+        line-height: 33px;
+        margin-bottom: 0px !important;
+    }
+
+    .form-control {
+        width: 82% !important;
+    }
+
+    h3 {
+        font-size: 23px !important;
+        text-align: center;
+    }
+
+    .form-control {
+        margin-top: 6px;
+        height: 33px !important;
+        margin-left: 10px;
+        box-shadow: none;
+    }
+
+        .form-control :focus {
+            box-shadow: none;
+        }
+
+    label {
+        width: 110px !important;
+    }
+
+    .field-validation-error {
+        margin-left: 124px;
+        color: red;
+    }
+
+    .g-recaptcha {
+        margin-left: 107px;
+    }
+
+    #sign_out {
+        margin-top: 20px;
+        margin-left: 107px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
